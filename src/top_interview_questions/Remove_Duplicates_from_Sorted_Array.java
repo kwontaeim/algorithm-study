@@ -14,5 +14,25 @@ public class Remove_Duplicates_from_Sorted_Array {
 
     public static void main(String[] args) {
 
+        int[] nums = {0,0,1,1,1,2,2,3,3,4};
+
+        int len = removeDuplicates(nums);
+
+        printArray(nums);
+
     }
+
+    static int removeDuplicates(int[] nums) {
+
+        // implement
+
+        return nums.length;
+    }
+
+    static void printArray(int[] nums) {
+        for(int i=0; i < nums.length; i++) {
+            System.out.print(nums[i] + ", ");
+        }
+    }
+
 }
