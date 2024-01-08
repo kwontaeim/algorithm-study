@@ -1,5 +1,7 @@
 package cracking_the_coding_interview;
 
+import java.util.HashSet;
+
 public class RemoveDupsLinkedList {
 
     /*
@@ -11,11 +13,13 @@ public class RemoveDupsLinkedList {
     public static void main(String[] args) {
         ListNode inputList1 = new ListNode(5, new ListNode(2, new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(5))))));
         ListNode inputList2 = new ListNode(2, new ListNode(2, new ListNode(2)));
-        System.out.println("[Input 1] '5->2->1->1->2->5' >>> expected 5->2->1->, actual : " + removeDups(inputList1));
-        System.out.println("[Input 2] '2->2->2->' >>> expected 2->, actual : " + removeDups(inputList2));
+        System.out.println("[Input 1] '5->2->1->1->2->5' >>> expected 5->2->1->, actual : " + removeDupsNobuffer(inputList1));
+        System.out.println("[Input 2] '2->2->2->' >>> expected 2->, actual : " + removeDupsNobuffer(inputList2));
+        System.out.println("[Input 3] '5->2->1->1->2->5' >>> expected 5->2->1->, actual : " + removeDupsHash(inputList1));
+        System.out.println("[Input 4] '2->2->2->' >>> expected 2->, actual : " + removeDupsHash(inputList2));
     }
-
-    static String removeDups(ListNode head) {
+    // solution 1 :  No Buffer Allowed
+    static String removeDupsNobuffer(ListNode head) {
         ListNode list = head;
         ListNode base = head;
         while (base != null) {
@@ -28,6 +32,21 @@ public class RemoveDupsLinkedList {
             }
             base = base.next;
             list = base;
+        }
+        return print(head);
+    }
+
+    // solution 2 : Use hash table
+    static String removeDupsHash(ListNode head) {
+        HashSet<Integer> set = new HashSet<>();
+        ListNode list = head;
+        while(list != null && list.next != null) {
+            set.add(list.val);
+            if(set.contains(list.next.val)){
+                list.next = list.next.next;
+            } else {
+                list = list.next;
+            }
         }
         return print(head);
     }
